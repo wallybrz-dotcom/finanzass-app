@@ -207,4 +207,16 @@ def evaluar_cuotas(data: EvaluacionCuota):
         "monto_cuota_mensual": round(monto_cuota, 2),
         "veredicto": "Comprar en cuotas" if conviene else "Pagar de contado",
         "ahorro_estimado": round(data.precio_contado - valor_presente, 2) if conviene else 0
-    }
+    }from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+# Permitir solicitudes desde el celular y GitHub Pages
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
